@@ -7,14 +7,15 @@ import java.net.http.HttpResponse;
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         String requestUrl = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
-        String authorization = "Bearer " + ApiKeys.apiReadingToken;
+        String authorizationHeader = "Bearer " + ApiKeys.apiReadingToken;
 
+        // Ainda não estamos tratando a exceção!!
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(requestUrl))
                 .header("accept", "application/json")
-                .header("Authorization", authorization)
+                .header("Authorization", authorizationHeader)
                 .GET()
                 .build();
 
