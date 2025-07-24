@@ -56,6 +56,6 @@ bin/
 hs_err_pid*
 replay_pid*
 
-TMDB/Api_Keys.java
-TMDB/Api_Keys.txt
+src/TMDB/Api_Keys.java
+src/TMDB/Api_Keys.txt
 src/ApiKeys.java
