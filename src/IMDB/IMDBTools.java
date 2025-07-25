@@ -73,7 +73,8 @@ public class IMDBTools {
         return atributeList;
     }
 
-    public static ArrayList<String> parseAttribute(String response, String atribute){
+    // Faz o processo completo de uma vez, diretamente da response
+    public static ArrayList<String> parseAttributeByResponse(String response, String atribute){
         // Pega só a lista "Items" (como uma string), que contém todos os objetos dos filmes
         String itemsStr = getItemsByString(response);
 
@@ -87,23 +88,23 @@ public class IMDBTools {
     // Retorna uma lista de objetos do tipo Film
     public static ArrayList<Film> parseMovieObjects(String response){
         ArrayList<String> titles = new ArrayList<String>();
-        titles = IMDBTools.parseAttribute(response, "title");
+        titles = IMDBTools.parseAttributeByResponse(response, "title");
         ArrayList<String> ids = new ArrayList<String>();
-        ids = IMDBTools.parseAttribute(response, "id");
+        ids = IMDBTools.parseAttributeByResponse(response, "id");
         ArrayList<String> ranks = new ArrayList<String>();
-        ranks = IMDBTools.parseAttribute(response, "rank");
+        ranks = IMDBTools.parseAttributeByResponse(response, "rank");
         ArrayList<String> fullTitles = new ArrayList<String>();
-        fullTitles = IMDBTools.parseAttribute(response, "fullTitle");
+        fullTitles = IMDBTools.parseAttributeByResponse(response, "fullTitle");
         ArrayList<String> years = new ArrayList<String>();
-        years = IMDBTools.parseAttribute(response, "year");
+        years = IMDBTools.parseAttributeByResponse(response, "year");
         ArrayList<String> images = new ArrayList<String>();
-        images = IMDBTools.parseAttribute(response, "image");
+        images = IMDBTools.parseAttributeByResponse(response, "image");
         ArrayList<String> crews = new ArrayList<String>();
-        crews = IMDBTools.parseAttribute(response, "crew");
+        crews = IMDBTools.parseAttributeByResponse(response, "crew");
         ArrayList<String> imDbRatings = new ArrayList<String>();
-        imDbRatings = IMDBTools.parseAttribute(response, "imDbRating");
+        imDbRatings = IMDBTools.parseAttributeByResponse(response, "imDbRating");
         ArrayList<String> imDbRatingCounts = new ArrayList<String>();
-        imDbRatingCounts = IMDBTools.parseAttribute(response, "imDbRatingCount");
+        imDbRatingCounts = IMDBTools.parseAttributeByResponse(response, "imDbRatingCount");
 
 
         ArrayList<Film> films = new ArrayList<>();
@@ -123,11 +124,26 @@ public class IMDBTools {
         return films;
     }
 
-    private static ArrayList<String> parseTitles(){
-
+    private static ArrayList<String> parseTitles(String response){
+        ArrayList<String> titles = new ArrayList<String>();
+        titles = IMDBTools.parseAttributeByResponse(response, "title");
+        return titles;
     }
-    private static ArrayList<String> parseUrlImages(){}
-    private static ArrayList<String> parseRatings(){}
-    private static ArrayList<String> parseYearss(){}
+    private static ArrayList<String> parseUrlImages(String response){
+        ArrayList<String> images = new ArrayList<String>();
+        images = IMDBTools.parseAttributeByResponse(response, "image");
 
+        return images;
+    }
+    private static ArrayList<String> parseRatings(String response){
+        ArrayList<String> ratings = new ArrayList<String>();
+        ratings = IMDBTools.parseAttributeByResponse(response, "imDbRating");
+
+        return ratings;
+    }
+    private static ArrayList<String> parseYears(String response){
+        ArrayList<String> years = new ArrayList<String>();
+        years = IMDBTools.parseAttributeByResponse(response, "year");
+        return years;
+    }
 }
