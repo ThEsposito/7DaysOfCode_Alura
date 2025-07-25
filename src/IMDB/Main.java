@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.*;
 
 
 public class Main {
@@ -18,10 +19,13 @@ public class Main {
                 .GET()
                 .build();
 
-        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(httpResponse.body());
-//        System.out.println(httpResponse.statusCode());
-//        System.out.println(httpResponse.version());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        ArrayList<Film> films = IMDBTools.getObjectList(response.body());
+
+        for(Film film:films){
+            System.out.println(film);
+        }
 
     }
 }
