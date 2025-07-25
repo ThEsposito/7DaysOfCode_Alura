@@ -1,5 +1,6 @@
 package IMDB;
 
+import IMDB.domain.Film;
 import java.util.ArrayList;
 
 public class IMDBTools {

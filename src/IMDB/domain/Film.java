@@ -1,15 +1,25 @@
-package IMDB;
+package IMDB.domain;
 
+/*
+Para o contexto deste exercício, pensei em criar uma classe (contendo os atributos disponibilizados
+pela api) com as seguintes características:
+    - Não teria setters, já que vamos apenas receber os dados da API e a classe serviria apenas como uma
+      representação deles.
+    - Portanto, teria um construtor padrão com os atributos obrigatórios.
+    - Todos os atributos serão finals, graças à ausência dos setters.
+    - Ela não será interfaceada, já que não estamos lidando com outros tipos de mídia (séries, documentários, etc)
+    - Faz sentido sobrescrever/implementar alguns métodos comuns, como getters, toString(), hashCode(), equals(), etc
+ */
 public class Film {
-    private String id;
-    private String rank;
-    private String title;
-    private String fullTitle;
-    private String year;
-    private String image;
-    private String crew;
-    private String imDbRating;
-    private String imDbRatingCount;
+    private final String id;
+    private final String rank;
+    private final String title;
+    private final String fullTitle;
+    private final String year;
+    private final String image;
+    private final String crew;
+    private final String imDbRating;
+    private final String imDbRatingCount;
 
     public Film(String id, String rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount) {
         this.id = id;
@@ -57,42 +67,6 @@ public class Film {
 
     public String getImDbRatingCount() {
         return imDbRatingCount;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setRank(String rank) {
-        this.rank = rank;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setFullTitle(String fullTitle) {
-        this.fullTitle = fullTitle;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public void setCrew(String crew) {
-        this.crew = crew;
-    }
-
-    public void setImDbRating(String imDbRating) {
-        this.imDbRating = imDbRating;
-    }
-
-    public void setImDbRatingCount(String imDbRatingCount) {
-        this.imDbRatingCount = imDbRatingCount;
     }
 
     @Override
