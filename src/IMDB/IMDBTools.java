@@ -14,7 +14,15 @@ public class IMDBTools {
         }
         return -1;
     }
-    private static int countOcurrencies(char value, String s){
+    private static int lastOcurrency(char value, String s){
+        for(int i=s.length()-1; i>=0; i--){
+            if(s.charAt(i) == value){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static int countOcurrencies(char value, String s){
         int count = 0;
         for(int i=0; i<s.length(); i++){
             if(s.charAt(i) == value){
@@ -29,10 +37,9 @@ public class IMDBTools {
     }
 
     // Pega, como String, apenas a lista com todos os filmes
-    // Poderia dar problema, se houvesse uma lista dentro de outra lista
     private static String getItemsByString(String response){
         int beginList = firstOcurrency('[', response);
-        int endList = firstOcurrency(']', response);
+        int endList = lastOcurrency(']', response);
 
         return response.substring(beginList+1, endList);
     }
