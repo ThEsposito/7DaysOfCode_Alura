@@ -21,7 +21,7 @@ public class Main {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        ArrayList<Film> films = IMDBTools.getObjectList(response.body());
+        ArrayList<Film> films = IMDBTools.parseMovieObjects(response.body());
 
         for(Film film:films){
             System.out.println(film);

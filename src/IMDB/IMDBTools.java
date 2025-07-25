@@ -3,7 +3,8 @@ package IMDB;
 import java.util.ArrayList;
 
 public class IMDBTools {
-    // Não conhecia o .indexOf kkkk
+    // Não conhecia o .indexOf kkkk. Esses 2 primeiros métodos podem ser movidos para outra classe (questão de
+    // organização)
     private static int firstOcurrency(char value, String s){
         for(int i=0; i<s.length(); i++){
             if(s.charAt(i) == value){
@@ -21,21 +22,25 @@ public class IMDBTools {
         }
         return count;
     }
+    public static int countFilms(String response){
+        String items = getItemsByString(response);
+        return countOcurrencies('{', items);
+    }
 
     // Pega, como String, apenas a lista com todos os filmes
     // Poderia dar problema, se houvesse uma lista dentro de outra lista
     private static String getItemsByString(String response){
         int beginList = firstOcurrency('[', response);
-        int endList = firstOcurrency(']', response); // tava usando o last ocurrency antes! Mas acho q deu pau
+        int endList = firstOcurrency(']', response);
 
         return response.substring(beginList+1, endList);
     }
 
-
     // Isso pode dar problema em JSON's mais complexos, com objetos dentro de objetos.
     // Isso também poderia ser implementado posteriormente, mas preferi manter a simplicidade já que estamos
     // lidando apenas com esse endpoint da API.
-    private static ArrayList<String> getFilmList(String filmsString){
+    // Retorna uma lista com os filmes (em String) separados. Os atributos ainda não são separados.
+    private static ArrayList<String> parseJsonMovies(String filmsString){
         ArrayList<String> filmList = new ArrayList<>();
         int filmCount = countOcurrencies('{', filmsString);
 
@@ -52,7 +57,7 @@ public class IMDBTools {
 
     // Só funciona com atributos que são Strings!!
     // Gera uma lista contendo certo atributo de uma lista de objetos (cujos valores estão em String)
-    private static ArrayList<String> getAnAtributeList(String atribute, ArrayList<String> films){
+    private static ArrayList<String> parseAttribute(String atribute, ArrayList<String> films){
         ArrayList<String> atributeList = new ArrayList<>();
         int atributeNameSize = atribute.length();
 
@@ -68,41 +73,37 @@ public class IMDBTools {
         return atributeList;
     }
 
-    public static ArrayList<String> responseToAtributeList(String response, String atribute){
+    public static ArrayList<String> parseAttribute(String response, String atribute){
         // Pega só a lista "Items" (como uma string), que contém todos os objetos dos filmes
         String itemsStr = getItemsByString(response);
 
         // Separa os objetos (cada um sendo uma String)
         ArrayList<String> responseItemsArray = new ArrayList<>();
-        responseItemsArray = getFilmList(itemsStr);
+        responseItemsArray = parseJsonMovies(itemsStr);
 
-        return getAnAtributeList(atribute, responseItemsArray);
+        return parseAttribute(atribute, responseItemsArray);
     }
 
-    public static int countFilms(String response){
-        String items = getItemsByString(response);
-        return countOcurrencies('{', items);
-    }
-
-    public static ArrayList<Film> getObjectList(String response){
+    // Retorna uma lista de objetos do tipo Film
+    public static ArrayList<Film> parseMovieObjects(String response){
         ArrayList<String> titles = new ArrayList<String>();
-        titles = IMDBTools.responseToAtributeList(response, "title");
+        titles = IMDBTools.parseAttribute(response, "title");
         ArrayList<String> ids = new ArrayList<String>();
-        ids = IMDBTools.responseToAtributeList(response, "id");
+        ids = IMDBTools.parseAttribute(response, "id");
         ArrayList<String> ranks = new ArrayList<String>();
-        ranks = IMDBTools.responseToAtributeList(response, "rank");
+        ranks = IMDBTools.parseAttribute(response, "rank");
         ArrayList<String> fullTitles = new ArrayList<String>();
-        fullTitles = IMDBTools.responseToAtributeList(response, "fullTitle");
+        fullTitles = IMDBTools.parseAttribute(response, "fullTitle");
         ArrayList<String> years = new ArrayList<String>();
-        years = IMDBTools.responseToAtributeList(response, "year");
+        years = IMDBTools.parseAttribute(response, "year");
         ArrayList<String> images = new ArrayList<String>();
-        images = IMDBTools.responseToAtributeList(response, "image");
+        images = IMDBTools.parseAttribute(response, "image");
         ArrayList<String> crews = new ArrayList<String>();
-        crews = IMDBTools.responseToAtributeList(response, "crew");
+        crews = IMDBTools.parseAttribute(response, "crew");
         ArrayList<String> imDbRatings = new ArrayList<String>();
-        imDbRatings = IMDBTools.responseToAtributeList(response, "imDbRating");
+        imDbRatings = IMDBTools.parseAttribute(response, "imDbRating");
         ArrayList<String> imDbRatingCounts = new ArrayList<String>();
-        imDbRatingCounts = IMDBTools.responseToAtributeList(response, "imDbRatingCount");
+        imDbRatingCounts = IMDBTools.parseAttribute(response, "imDbRatingCount");
 
 
         ArrayList<Film> films = new ArrayList<>();
@@ -122,5 +123,11 @@ public class IMDBTools {
         return films;
     }
 
-//    public static int filmCount(){    }
+    private static ArrayList<String> parseTitles(){
+
+    }
+    private static ArrayList<String> parseUrlImages(){}
+    private static ArrayList<String> parseRatings(){}
+    private static ArrayList<String> parseYearss(){}
+
 }
