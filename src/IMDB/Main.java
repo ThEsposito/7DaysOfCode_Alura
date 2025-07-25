@@ -9,13 +9,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
 
-
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         String requestUrl = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
-        // Ainda não estamos tratando a exceção!!
-        HttpClient client = HttpClient.newHttpClient();
 
+        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(requestUrl))
                 .GET()
@@ -28,6 +26,5 @@ public class Main {
         for(Film film:films){
             System.out.println(film);
         }
-
     }
 }

@@ -7,80 +7,22 @@ pela api) com as seguintes características:
       representação deles.
     - Portanto, teria um construtor padrão com os atributos obrigatórios.
     - Todos os atributos serão finals, graças à ausência dos setters.
-    - Ela não será interfaceada, já que não estamos lidando com outros tipos de mídia (séries, documentários, etc)
-    - Faz sentido sobrescrever/implementar alguns métodos comuns, como getters, toString(), hashCode(), equals(), etc
+    - Ela não será interfaceada, nem trabalhará com herança. já que não estamos lidando com outros tipos de
+      mídia (séries, documentários, etc)
+    - Faz sentido sobrescrever alguns métodos comuns, como getters, toString(), etc
+
+ Depois de montar a classe, percebi que os conceitos e características aplicadas aqui se enquadram perfeitamente
+ nos casos de uso de Records. Portanto, decidi transformar a classe em Record para mantê-la mais organizada.
  */
-public class Film {
-    private final String id;
-    private final String rank;
-    private final String title;
-    private final String fullTitle;
-    private final String year;
-    private final String image;
-    private final String crew;
-    private final String imDbRating;
-    private final String imDbRatingCount;
-
-    public Film(String id, String rank, String title, String fullTitle, String year, String image, String crew, String imDbRating, String imDbRatingCount) {
-        this.id = id;
-        this.rank = rank;
-        this.title = title;
-        this.fullTitle = fullTitle;
-        this.year = year;
-        this.image = image;
-        this.crew = crew;
-        this.imDbRating = imDbRating;
-        this.imDbRatingCount = imDbRatingCount;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getRank() {
-        return rank;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getFullTitle() {
-        return fullTitle;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getCrew() {
-        return crew;
-    }
-
-    public String getImDbRating() {
-        return imDbRating;
-    }
-
-    public String getImDbRatingCount() {
-        return imDbRatingCount;
-    }
-
-    @Override
-    public String toString() {
-        return "Film{" +
-                "id='" + id + '\'' +
-                ", rank='" + rank + '\'' +
-                ", title='" + title + '\'' +
-                ", fullTitle='" + fullTitle + '\'' +
-                ", year='" + year + '\'' +
-                ", image='" + image + '\'' +
-                ", crew='" + crew + '\'' +
-                ", imDbRating='" + imDbRating + '\'' +
-                ", imDbRatingCount='" + imDbRatingCount + '\'' +
-                '}';
-    }
-}
+public record Film (
+    String id,
+    String rank,
+    String title,
+    String fullTitle,
+    String year,
+    String image,
+    String crew,
+    String imDbRating,
+    String imDbRatingCount
+){}
+//Obs: Poderíamos sobrecarregar o construtor, para caso não seja necessário montar receber todos os atributos
