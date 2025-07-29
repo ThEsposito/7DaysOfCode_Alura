@@ -14,7 +14,7 @@ pela api) com as seguintes características:
  Depois de montar a classe, percebi que os conceitos e características aplicadas aqui se enquadram perfeitamente
  nos casos de uso de Records. Portanto, decidi transformar a classe em Record para mantê-la mais organizada.
  */
-public record Film (
+public record Movie(
     String id,
     String rank,
     String title,

@@ -1,8 +1,12 @@
-package IMDB;
+package IMDB.app;
 
-import IMDB.domain.Film;
+import IMDB.service.HTMLGenerator;
+import IMDB.service.IMDBTools;
+import IMDB.domain.Movie;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -20,11 +24,21 @@ public class Main {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
+        if(response.statusCode()!=200){return;}
+        ArrayList<Movie> movies = IMDBTools.parseMovieObjects(response.body());
 
-        ArrayList<Film> films = IMDBTools.parseMovieObjects(response.body());
-
-        for(Film film:films){
-            System.out.println(film);
+        for(Movie movie : movies){
+            System.out.println(movie);
         }
+
+        var printWriter = new FileWriter("movies.html");
+        try {
+            final var htmlGenerator = new HTMLGenerator(printWriter);
+            htmlGenerator.generate(movies);
+        } finally {
+            printWriter.close();
+        }
+
     }
 }

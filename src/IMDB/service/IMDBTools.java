@@ -1,6 +1,6 @@
-package IMDB;
+package IMDB.service;
 
-import IMDB.domain.Film;
+import IMDB.domain.Movie;
 import java.util.ArrayList;
 
 public class IMDBTools {
@@ -74,9 +74,8 @@ public class IMDBTools {
             int valueBegin = atributeEnd+2; // Ignora as aspas do comeco
 
             String temp = item.substring(valueBegin);
-
-            String temp2 = temp.substring(0, firstOcurrency('"', temp));
-            atributeList.add(temp2);
+            temp = temp.substring(0, firstOcurrency('"', temp));
+            atributeList.add(temp);
         }
         return atributeList;
     }
@@ -92,7 +91,7 @@ public class IMDBTools {
     }
 
     // Retorna uma lista de objetos do tipo Film
-    public static ArrayList<Film> parseMovieObjects(String response){
+    public static ArrayList<Movie> parseMovieObjects(String response){
         ArrayList<String> titles = IMDBTools.parseAttributeByResponse(response, "title");
         ArrayList<String> ids = IMDBTools.parseAttributeByResponse(response, "id");
         ArrayList<String> ranks = IMDBTools.parseAttributeByResponse(response, "rank");
@@ -104,10 +103,10 @@ public class IMDBTools {
         ArrayList<String> imDbRatingCounts = IMDBTools.parseAttributeByResponse(response, "imDbRatingCount");
 
 
-        ArrayList<Film> films = new ArrayList<>();
+        ArrayList<Movie> movies = new ArrayList<>();
         int filmCount = IMDBTools.countFilms(response);
         for(int i=0; i<filmCount; i++){
-            films.add(new Film(ids.get(i),
+            movies.add(new Movie(ids.get(i),
                     ranks.get(i),
                     titles.get(i),
                     fullTitles.get(i),
@@ -118,7 +117,7 @@ public class IMDBTools {
                     imDbRatingCounts.get(i)));
         }
 
-        return films;
+        return movies;
     }
 
     // Implementei esses métodos caso seja necessário utilizar apenas um dos atributos
