@@ -3,7 +3,6 @@ package IMDB.service;
 import IMDB.domain.Movie;
 
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HTMLGenerator {
@@ -30,7 +29,7 @@ public class HTMLGenerator {
                 \t\t\t<p>Rate: %s - Year: %s</p>
                 \t\t</div>
                 
-                """, movie.title(), movie.image(),movie.title(), movie.imDbRating(), movie.year());
+                """, movie.title(), movie.urlImage(),movie.title(), movie.rating(), movie.year());
     }
 
     public void generate(List<Movie> movies) throws java.io.IOException{

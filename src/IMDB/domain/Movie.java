@@ -20,9 +20,9 @@ public record Movie(
     String title,
     String fullTitle,
     String year,
-    String image,
+    String urlImage,
     String crew,
-    String imDbRating,
+    String rating,
     String imDbRatingCount
 ){}
 //Obs: Poderíamos sobrecarregar o construtor, para caso não seja necessário montar receber todos os atributos
