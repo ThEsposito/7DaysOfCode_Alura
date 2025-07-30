@@ -23,9 +23,12 @@ public class HTMLGenerator {
 
     private static String movieBody(Movie movie){
         return String.format("""
-                \t\t<h2>%s</h2>
-                \t\t<img src=%s alt="%s - poster">
-                \t\t<p>Rate: %s - Year: %s</p>
+                \t\t<div>
+                \t\t\t<h2>%s</h2>
+                \t\t\t<img src="%s" alt="%s - poster">
+                \t\t\t<p>Rate: %s - Year: %s</p>
+                \t\t</div>
+                
                 """, movie.title(), movie.image(),movie.title(), movie.imDbRating(), movie.year());
     }
 
@@ -36,7 +39,10 @@ public class HTMLGenerator {
     <html lang="en">
     """);
         WRITER.write(HEAD+"\n");
-        WRITER.write("\t<body>\n");
+        WRITER.write("""
+        \t<body>
+        \t\t<h1>Top 250 movies by IMDb</h1>
+        """);
         for(Movie movie:movies){
             WRITER.write(movieBody(movie));
         }
