@@ -4,6 +4,7 @@ import IMDB.domain.Movie;
 
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HTMLGenerator {
     private final Writer WRITER;
@@ -32,7 +33,7 @@ public class HTMLGenerator {
                 """, movie.title(), movie.image(),movie.title(), movie.imDbRating(), movie.year());
     }
 
-    public void generate(ArrayList<Movie> movies) throws java.io.IOException{
+    public void generate(List<Movie> movies) throws java.io.IOException{
         WRITER.write(
     """
     <!DOCTYPE html>

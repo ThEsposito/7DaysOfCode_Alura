@@ -4,8 +4,6 @@ import IMDB.domain.Movie;
 import java.util.ArrayList;
 
 public class IMDBTools {
-    // Não conhecia o .indexOf() kkkk. Esses 2 primeiros métodos podem ser movidos para outra classe (questão de
-    // organização)
     private static int firstOcurrency(char value, String s){
         for(int i=0; i<s.length(); i++){
             if(s.charAt(i) == value){
@@ -31,6 +29,7 @@ public class IMDBTools {
         }
         return count;
     }
+
     public static int countFilms(String response){
         String items = getItemsByString(response);
         return countOcurrencies('{', items);
@@ -90,6 +89,12 @@ public class IMDBTools {
         return parseAttribute(atribute, responseItemsArray);
     }
 
+
+
+
+
+
+
     // Retorna uma lista de objetos do tipo Film
     public static ArrayList<Movie> parseMovieObjects(String response){
         ArrayList<String> titles = IMDBTools.parseAttributeByResponse(response, "title");
@@ -118,19 +123,5 @@ public class IMDBTools {
         }
 
         return movies;
-    }
-
-    // Implementei esses métodos caso seja necessário utilizar apenas um dos atributos
-    public static ArrayList<String> parseTitles(String response){
-        return IMDBTools.parseAttributeByResponse(response, "title");
-    }
-    public static ArrayList<String> parseUrlImages(String response){
-        return IMDBTools.parseAttributeByResponse(response, "image");
-    }
-    public static ArrayList<String> parseRatings(String response){
-        return IMDBTools.parseAttributeByResponse(response, "imDbRating");
-    }
-    public static ArrayList<String> parseYears(String response){
-        return IMDBTools.parseAttributeByResponse(response, "year");
     }
 }
