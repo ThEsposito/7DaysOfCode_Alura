@@ -2,8 +2,10 @@ package IMDB.app;
 
 import IMDB.service.HTMLGenerator;
 import IMDB.domain.Movie;
-import IMDB.service.ImdbApiClient;
-import IMDB.service.ImdbMovieJsonParser;
+import IMDB.service.imdb.ImdbApiClient;
+import IMDB.service.imdb.ImdbMovieJsonParser;
+import IMDB.service.marvel.MarvelApiClient;
+import IMDB.service.marvel.MarvelContentType;
 
 import java.io.FileWriter;
 import java.util.List;
@@ -27,5 +29,8 @@ public class Main {
             htmlGenerator.generate(movies);
         }
 
+        // Marvel API
+        MarvelApiClient marvelApiClient = new MarvelApiClient();
+        System.out.println(marvelApiClient.getBody(MarvelContentType.COMIC_SERIES));
     }
 }
