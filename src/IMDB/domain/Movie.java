@@ -25,4 +25,4 @@ public record Movie(
     String imDbRating,
     String imDbRatingCount
 ){}
-//Obs: Poderíamos sobrecarregar o construtor, para caso não seja necessário montar receber todos os atributos
+//Obs: Poderíamos sobrecarregar o construtor, para caso não seja necessário receber todos os atributos
