@@ -6,7 +6,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import IMDB.service.IMDBTools;
 
 
 public class Main {
@@ -26,14 +25,14 @@ public class Main {
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(httpResponse.body());
         System.out.println("-------------------------");
-        ArrayList<String> titles = IMDBTools.parseAttributeByResponse(httpResponse.body(), "original_title");
+        ArrayList<String> titles = TMDBTools.parseAttributeByResponse(httpResponse.body(), "original_title");
 //        System.out.println(httpResponse.statusCode());
 //        System.out.println(httpResponse.version());
         for(String title:titles){
             System.out.println(title);
         }
-        System.out.println(IMDBTools.countFilms(httpResponse.body()));
-        System.out.println(IMDBTools.countOcurrencies('{',httpResponse.body()));
+        System.out.println(TMDBTools.countFilms(httpResponse.body()));
+        System.out.println(TMDBTools.countOcurrencies('{',httpResponse.body()));
 
     }
 }

@@ -1,9 +1,9 @@
-package IMDB.service;
+package TMDB;
 
 import IMDB.domain.Movie;
 import java.util.ArrayList;
 
-public class IMDBTools {
+public class TMDBTools {
     private static int firstOcurrency(char value, String s){
         for(int i=0; i<s.length(); i++){
             if(s.charAt(i) == value){
@@ -97,19 +97,19 @@ public class IMDBTools {
 
     // Retorna uma lista de objetos do tipo Film
     public static ArrayList<Movie> parseMovieObjects(String response){
-        ArrayList<String> titles = IMDBTools.parseAttributeByResponse(response, "title");
-        ArrayList<String> ids = IMDBTools.parseAttributeByResponse(response, "id");
-        ArrayList<String> ranks = IMDBTools.parseAttributeByResponse(response, "rank");
-        ArrayList<String> fullTitles = IMDBTools.parseAttributeByResponse(response, "fullTitle");
-        ArrayList<String> years = IMDBTools.parseAttributeByResponse(response, "year");
-        ArrayList<String> images = IMDBTools.parseAttributeByResponse(response, "image");
-        ArrayList<String> crews = IMDBTools.parseAttributeByResponse(response, "crew");
-        ArrayList<String> imDbRatings = IMDBTools.parseAttributeByResponse(response, "imDbRating");
-        ArrayList<String> imDbRatingCounts = IMDBTools.parseAttributeByResponse(response, "imDbRatingCount");
+        ArrayList<String> titles = TMDBTools.parseAttributeByResponse(response, "title");
+        ArrayList<String> ids = TMDBTools.parseAttributeByResponse(response, "id");
+        ArrayList<String> ranks = TMDBTools.parseAttributeByResponse(response, "rank");
+        ArrayList<String> fullTitles = TMDBTools.parseAttributeByResponse(response, "fullTitle");
+        ArrayList<String> years = TMDBTools.parseAttributeByResponse(response, "year");
+        ArrayList<String> images = TMDBTools.parseAttributeByResponse(response, "image");
+        ArrayList<String> crews = TMDBTools.parseAttributeByResponse(response, "crew");
+        ArrayList<String> imDbRatings = TMDBTools.parseAttributeByResponse(response, "imDbRating");
+        ArrayList<String> imDbRatingCounts = TMDBTools.parseAttributeByResponse(response, "imDbRatingCount");
 
 
         ArrayList<Movie> movies = new ArrayList<>();
-        int filmCount = IMDBTools.countFilms(response);
+        int filmCount = TMDBTools.countFilms(response);
         for(int i=0; i<filmCount; i++){
             movies.add(new Movie(ids.get(i),
                     ranks.get(i),
