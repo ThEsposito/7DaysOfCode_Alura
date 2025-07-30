@@ -1,4 +1,4 @@
-package IMDB.service;
+package IMDB.service.imdb;
 
 import java.net.URI;
 import java.net.http.HttpClient;

@@ -1,5 +1,6 @@
 package IMDB.service;
 
+import IMDB.domain.Content;
 import IMDB.domain.Movie;
 
 import java.io.Writer;
@@ -21,7 +22,7 @@ public class HTMLGenerator {
         this.WRITER = WRITER;
     }
 
-    private static String movieBody(Movie movie){
+    private static String movieBody(Content content){
         return String.format("""
                 \t\t<div>
                 \t\t\t<h2>%s</h2>
@@ -29,10 +30,10 @@ public class HTMLGenerator {
                 \t\t\t<p>Rate: %s - Year: %s</p>
                 \t\t</div>
                 
-                """, movie.title(), movie.urlImage(),movie.title(), movie.rating(), movie.year());
+                """, content.title(), content.urlImage(), content.title(), content.rating(), content.year());
     }
 
-    public void generate(List<Movie> movies) throws java.io.IOException{
+    public void generate(List<? extends Content> contents) throws java.io.IOException{
         WRITER.write(
     """
     <!DOCTYPE html>
@@ -43,8 +44,8 @@ public class HTMLGenerator {
         \t<body>
         \t\t<h1>Top 250 movies by IMDb</h1>
         """);
-        for(Movie movie:movies){
-            WRITER.write(movieBody(movie));
+        for(Content content:contents){
+            WRITER.write(movieBody(content));
         }
         WRITER.write("""
                 \t</body>

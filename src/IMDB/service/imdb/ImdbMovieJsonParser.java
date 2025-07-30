@@ -1,11 +1,12 @@
-package IMDB.service;
+package IMDB.service.imdb;
 
 import IMDB.domain.Movie;
+import IMDB.service.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImdbMovieJsonParser {
+public class ImdbMovieJsonParser implements JsonParser {
     private final String response;
 
     public ImdbMovieJsonParser(String response) {

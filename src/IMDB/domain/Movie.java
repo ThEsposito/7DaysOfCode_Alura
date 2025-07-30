@@ -15,14 +15,14 @@ pela api) com as seguintes características:
  nos casos de uso de Records. Portanto, decidi transformar a classe em Record para mantê-la mais organizada.
  */
 public record Movie(
-    String id,
-    String rank,
-    String title,
-    String fullTitle,
-    String year,
-    String urlImage,
-    String crew,
-    String rating,
-    String imDbRatingCount
-){}
+        String id,
+        String rank,
+        String title,
+        String fullTitle,
+        String year,
+        String urlImage,
+        String crew,
+        String rating,
+        String imDbRatingCount
+) implements Content{};
 //Obs: Poderíamos sobrecarregar o construtor, para caso não seja necessário montar receber todos os atributos
