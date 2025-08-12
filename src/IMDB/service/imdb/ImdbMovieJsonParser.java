@@ -45,7 +45,7 @@ public class ImdbMovieJsonParser implements JsonParser {
     }
 
     // Métdos auxiliares, utilizados no métdo principal .parse()
-
+    // Dá pra usar fila pra resolver isso daqui!!!! Palinhas do Alexandre
     // Pega, como String, apenas a lista com todos os filmes
     private String getItemsByString(){
         int beginList = firstOcurrency('[', this.response);
